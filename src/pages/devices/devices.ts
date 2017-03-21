@@ -12,11 +12,25 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'devices.html'
 })
 export class DevicesPage {
+  devices:Object = {}
+  temp:string = '';
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.devices = navParams.get('devs');
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+    console.log('Devices', this.devices);
+    console.log(this.devices);
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DevicesPage');
   }
+  goBack() {
+    this.navCtrl.pop();
+  }
 
+  getList() {
+    for (let keys in this.devices) {
+      this.temp += `ID: ${keys}\n Name: ${this.devices[keys].name}\n RSSI: ${this.devices[keys].rssi}\n`;
+    }
+  }
 }

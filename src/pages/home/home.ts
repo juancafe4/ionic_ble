@@ -21,7 +21,7 @@ export class HomePage {
 
     this.platform.ready().then(() => {
       BLE.isEnabled().then(() => {
-          //this.scan();
+          this.scan();
           this.delay();
       }).catch(() => {
         alert = this.alertCtrl.create({
@@ -43,16 +43,15 @@ export class HomePage {
   }
 
   delay() {
-    this.navCtrl.push(DevicesPage);
-    console.log('devices page', DevicesPage)
     setTimeout(() => {
-            let alert = this.alertCtrl.create({
-              title: 'Success',
-              subTitle: 'Scan succesful...',
-              buttons: ['Ok']
-            });
-            alert.present(); 
-            
+            // let alert = this.alertCtrl.create({
+            //   title: 'Success',
+            //   subTitle: 'Scan succesful...',
+            //   buttons: ['Ok']
+            // });
+            // alert.present(); 
+     let { devices } = this;
+     this.navCtrl.push(DevicesPage, { devs: devices });
     }, 16000);
   }
 }
