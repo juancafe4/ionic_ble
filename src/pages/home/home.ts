@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { DevicesPage } from '../devices/devices';
 import { NavController, AlertController, Platform } from 'ionic-angular';
 import { BLE } from 'ionic-native';
 
@@ -10,7 +10,7 @@ import { BLE } from 'ionic-native';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  devices:Object = {}
+  devices:Object = {};
   constructor(public navCtrl: NavController, private platform: Platform, private alertCtrl: AlertController) {
     
   }
@@ -21,7 +21,7 @@ export class HomePage {
 
     this.platform.ready().then(() => {
       BLE.isEnabled().then(() => {
-          this.scan();
+          //this.scan();
           this.delay();
       }).catch(() => {
         alert = this.alertCtrl.create({
@@ -43,6 +43,8 @@ export class HomePage {
   }
 
   delay() {
+    this.navCtrl.push(DevicesPage);
+    console.log('devices page', DevicesPage)
     setTimeout(() => {
             let alert = this.alertCtrl.create({
               title: 'Success',
@@ -50,9 +52,7 @@ export class HomePage {
               buttons: ['Ok']
             });
             alert.present(); 
-            for (let id in this.devices) {
-              console.log('UUID', this.devices[id]);
-            }
+            
     }, 16000);
   }
 }
